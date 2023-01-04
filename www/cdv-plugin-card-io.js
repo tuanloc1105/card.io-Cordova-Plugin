@@ -10,8 +10,7 @@
  *
  * @constructor
  */
-function CardIO() {
-}
+function CardIO() {}
 
 /**
  * Scan a credit card with card.io.
@@ -30,8 +29,8 @@ function CardIO() {
  * @parameter onFailure: a zero argument callback function that will be called if the user
  * cancels card scanning.
  */
-CardIO.prototype.scan = function(options, onSuccess, onFailure) {
-  cordova.exec(onSuccess, onFailure, "CardIO", "scan", [options]);
+CardIO.prototype.scan = function (options, onSuccess, onFailure) {
+    cordova.exec(onSuccess, onFailure, "CardIO", "scan", [options]);
 };
 
 /**
@@ -40,15 +39,15 @@ CardIO.prototype.scan = function(options, onSuccess, onFailure) {
  *
  * @parameter callback: a callback function accepting a boolean.
  */
-CardIO.prototype.canScan = function(callback) {
-  var failureCallback = function() {
-    console.log("Could not detect whether card.io card scanning is available.");
-    callback(false);
-  };
-  var wrappedSuccess = function(response) {
-    callback(response !== 0);
-  };
-  cordova.exec(wrappedSuccess, failureCallback, "CardIO", "canScan", []);
+CardIO.prototype.canScan = function (callback) {
+    var failureCallback = function () {
+        console.log("Could not detect whether card.io card scanning is available.");
+        callback(false);
+    };
+    var wrappedSuccess = function (response) {
+        callback(response !== 0);
+    };
+    cordova.exec(wrappedSuccess, failureCallback, "CardIO", "canScan", []);
 };
 
 /**
@@ -56,14 +55,17 @@ CardIO.prototype.canScan = function(callback) {
  *
  * @parameter callback: a callback function accepting a string.
  */
-CardIO.prototype.version = function(callback) {
-  var failureCallback = function() {
-    console.log("Could not retrieve card.io library version");
-  };
+CardIO.prototype.version = function (callback) {
+    var failureCallback = function () {
+        console.log("Could not retrieve card.io library version");
+    };
 
-  cordova.exec(callback, failureCallback, "CardIO", "version", []);
+    cordova.exec(callback, failureCallback, "CardIO", "version", []);
 };
 
+CardIO.prototype.coolMethod = function (arg0, success, error) {
+    console.log(success, error, 'MyPlugin', 'coolMethod', [arg0]);
+};
 
 /**
  * Plugin setup boilerplate.
