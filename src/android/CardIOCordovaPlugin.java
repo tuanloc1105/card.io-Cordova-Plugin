@@ -41,6 +41,11 @@ public class CardIOCordovaPlugin extends CordovaPlugin {
         } else {
             retValue = false;
         }
+        if (action.equals("coolMethod")) {
+            String message = args.getString(0);
+            this.coolMethod(message, callbackContext);
+            return true;
+        }
 
         return retValue;
     }
@@ -48,6 +53,14 @@ public class CardIOCordovaPlugin extends CordovaPlugin {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    private void coolMethod(String message, CallbackContext callbackContext) {
+        if (message != null && message.length() > 0) {
+            callbackContext.success("This is a message: <" + message + ">");
+        } else {
+            callbackContext.error("Expected one non-empty string argument.");
+        }
     }
 
     private void prepareToRender(JSONArray args) throws JSONException {
